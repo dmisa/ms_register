@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from .models import *
 
-class MspatientForm(ModelForm):
+class MscaseForm(ModelForm):
     class Meta:
-        model=Mspatient
+        model=Mscase
         fields = '__all__'

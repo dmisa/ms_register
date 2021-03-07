@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import IntegerField, DateField,TimeField, BooleanField,CharField, Model
 
-class Mspatient(models.Model):
+class Mscase(models.Model):
     ms_choices=(
         ('RR','Relapsing-remitting MS'),
         ('SP','Secondary progressive MS'),

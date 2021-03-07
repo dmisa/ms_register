@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<a href="{% url 'main:patientform' %}"><h1>vale enan astheni!</h1></a>
+<a href="{% url 'main:caseform' %}"><h1>vale enan astheni!</h1></a>
 
 <table id="table_id" class="display">
 <thead>
@@ -17,14 +17,14 @@
   </tr>
 </thead>
 <tbody>
-{% for mspatient in mspatients %}
+{% for mscase in mscases %}
     <tr>
-        <td>{{mspatient.studyid}}</td>
-        <td>{{mspatient.formdate}}</td>
-        <td>{{mspatient.name}}</td>
-        <td>{{mspatient.surname}}</td>
-        <td>{{mspatient.address}}</td>
-        <td><a href="{% url 'main:registryentry' mspatient.studyid %}">View</a></td>
+        <td>{{mscase.studyid}}</td>
+        <td>{{mscase.formdate}}</td>
+        <td>{{mscase.name}}</td>
+        <td>{{mscase.surname}}</td>
+        <td>{{mscase.address}}</td>
+        <td><a href="{% url 'main:registryentry' mscase.studyid %}">View</a></td>
     </tr>
   </tbody>
 {% endfor %}

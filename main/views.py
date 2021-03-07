@@ -10,41 +10,41 @@ def homepage(request):
 
 
 def registry(request):
-    mspatients = Mspatient.objects.all()
-    return render(request, 'main/registry.html', {'mspatients':mspatients})
+    mscases = Mscase.objects.all()
+    return render(request, 'main/registry.html', {'mscases':mscases})
 
 def registryentry(request,sid):
-    mspatient = Mspatient.objects.get(studyid=sid)
+    mscase = Mscase.objects.get(studyid=sid)
 
-    return render(request, 'main/patient.html', {'mspatient':mspatient})
+    return render(request, 'main/case.html', {'mscase':mscase})
 
 def createCase(request):
-    form=MspatientForm()
+    form=MscaseForm()
     if request.method =='POST':
-        form=MspatientForm(request.POST)
+        form=MscaseForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
         
     context={'form':form}
-    return render(request,'main/patientform.html',context)
+    return render(request,'main/caseform.html',context)
 
 def updateCase(request, sid):
-    mspatient=Mspatient.objects.get(studyid=sid)
-    form=MspatientForm(instance=mspatient)
+    mscase=Mscase.objects.get(studyid=sid)
+    form=MscaseForm(instance=mscase)
     if request.method =='POST':
-        form=MspatientForm(request.POST, instance=mspatient)
+        form=MscaseForm(request.POST, instance=mscase)
         if form.is_valid():
             form.save()
             return redirect('/')    
     context={'form':form}
-    return render(request,'main/patientform.html',context)
+    return render(request,'main/caseform.html',context)
 
 def deleteCase(request,sid):
-    mspatient=Mspatient.objects.get(studyid=sid)
+    mscase=Mscase.objects.get(studyid=sid)
     if request.method == "POST":
-        mspatient.delete()
+        mscase.delete()
         return redirect('/')    
 
-    context={'item':mspatient}
-    return render(request,'main/delete.html',context)
+    context={'item':mscase}
+    return render(request,'main/deletecase.html',context)

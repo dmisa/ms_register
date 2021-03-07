@@ -3,7 +3,7 @@
 {% block content %}
 
 <p>wanna delete {{item}}?</p>
-<form action="{% url 'main:delete_patientform' item.studyid %}" method="POST">
+<form action="{% url 'main:delete_caseform' item.studyid %}" method="POST">
     {% csrf_token %}
     <a href="{% url 'main:homepage' %}">cancel</a>
     <input type="submit" name="confirm">

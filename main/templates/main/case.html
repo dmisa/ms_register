@@ -1,0 +1,81 @@
+{% extends 'main/main_template.html' %}
+
+{% block content %}
+
+<h1> case data!</h1>
+<table id="table_id" class="display">
+<thead>
+  <tr>
+    <th>name</th>
+    <th>surname</th>
+    <th>address</th>
+    <th>formdate</th>
+    <th>studyid</th>
+    <th>ms_now</th>
+    <th>conv_to_sp</th>
+    <th>date_diag</th>
+    <th>ms_diag</th>
+    <th>date_onset</th>
+    <th>num_relapses</th>
+    <th>severity</th>
+    <th>pastmodtreat</th>
+    <th>pastmoddatestart</th>
+    <th>pastmodtreatstop</th>
+    <th>pastmodreason</th>
+    <th>presmodtreat</th>
+    <th>presmoddatestart</th>
+    <th>edssscore</th>
+    <th>edssdate</th>
+    <th>walkrangetime</th>
+    <th>walkrangedist</th>
+    <th>walkrangeeval</th>
+    <th>pregnant</th>
+    <th>smoker</th>
+    <th>cigperday</th>
+    <th>smokersince</th>
+    <th>onsetlocal</th>
+    <th>onsetsympt</th>
+    <th>personcompleting</th>
+  </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>{{mscase.name}}</td>
+        <td>{{mscase.surname}}</td>
+        <td>{{mscase.address}}</td>
+        <td>{{mscase.formdate}}</td>
+        <td>{{mscase.studyid}}</td>
+        <td>{{mscase.ms_now}}</td>
+        <td>{{mscase.conv_to_sp}}</td>
+        <td>{{mscase.date_diag}}</td>
+        <td>{{mscase.ms_diag}}</td>
+        <td>{{mscase.date_onset}}</td>
+        <td>{{mscase.num_relapses}}</td>
+        <td>{{mscase.severity}}</td>
+        <td>{{mscase.pastmodtreat}}</td>
+        <td>{{mscase.pastmoddatestart}}</td>
+        <td>{{mscase.pastmodtreatstop}}</td>
+        <td>{{mscase.pastmodreason}}</td>
+        <td>{{mscase.presmodtreat}}</td>
+        <td>{{mscase.presmoddatestart}}</td>
+        <td>{{mscase.edssscore}}</td>
+        <td>{{mscase.edssdate}}</td>
+        <td>{{mscase.walkrangetime}}</td>
+        <td>{{mscase.walkrangedist}}</td>
+        <td>{{mscase.walkrangeeval}}</td>
+        <td>{{mscase.pregnant}}</td>
+        <td>{{mscase.smoker}}</td>
+        <td>{{mscase.cigperday}}</td>
+        <td>{{mscase.smokersince}}</td>
+        <td>{{mscase.onsetlocal}}</td>
+        <td>{{mscase.onsetsympt}}</td>
+        <td>{{mscase.personcompleting}}</td>
+    </tr>
+  </tbody>
+  <a href="{% url 'main:delete_caseform' mscase.studyid %}">
+    <h1>diegrapse ton!</h1>
+  </a>
+  <a href="{% url 'main:update_caseform' mscase.studyid %}">
+    <h1>epeksergasia!</h1>
+  </a>
+{% endblock %}
