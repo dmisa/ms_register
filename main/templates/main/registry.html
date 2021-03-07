@@ -2,81 +2,39 @@
 
 {% block content %}
 
+
+<a href="{% url 'main:patientform' %}"><h1>vale enan astheni!</h1></a>
+
 <table id="table_id" class="display">
 <thead>
   <tr>
-    <th>name</th>
-    <th>address</th>
-    <th>formdate</th>
     <th>studyid</th>
-    <th>ms_now</th>
-    <th>conv_to_sp</th>
-    <th>date_diag</th>
-    <th>ms_diag</th>
-    <th>date_onset</th>
-    <th>num_relapses</th>
-    <th>severity</th>
-    <th>pastmodtreat</th>
-    <th>pastmoddatestart</th>
-    <th>pastmodtreatstop</th>
-    <th>pastmodreason</th>
-    <th>presmodtreat</th>
-    <th>presmoddatestart</th>
-    <th>edssscore</th>
-    <th>edssdate</th>
-    <th>walkrangetime</th>
-    <th>walkrangedist</th>
-    <th>walkrangeeval</th>
-    <th>pregnant</th>
-    <th>smoker</th>
-    <th>cigperday</th>
-    <th>smokersince</th>
-    <th>onsetlocal</th>
-    <th>onsetsympt</th>
-    <th>personcompleting</th>
+    <th>formdate</th>
+    <th>name</th>
+    <th>surname</th>
+    <th>address</th>
+    <th>ena<th>
   </tr>
 </thead>
-{% for mspatients in mspatients %}
+<tbody>
+{% for mspatient in mspatients %}
     <tr>
-        <td>{{mspatients.name}}</td>
-        <td>{{mspatients.address}}</td>
-        <td>{{mspatients.formdate}}</td>
-        <td>{{mspatients.studyid}}</td>
-        <td>{{mspatients.ms_now}}</td>
-        <td>{{mspatients.conv_to_sp}}</td>
-        <td>{{mspatients.date_diag}}</td>
-        <td>{{mspatients.ms_diag}}</td>
-        <td>{{mspatients.date_onset}}</td>
-        <td>{{mspatients.num_relapses}}</td>
-        <td>{{mspatients.severity}}</td>
-        <td>{{mspatients.pastmodtreat}}</td>
-        <td>{{mspatients.pastmoddatestart}}</td>
-        <td>{{mspatients.pastmodtreatstop}}</td>
-        <td>{{mspatients.pastmodreason}}</td>
-        <td>{{mspatients.presmodtreat}}</td>
-        <td>{{mspatients.presmoddatestart}}</td>
-        <td>{{mspatients.edssscore}}</td>
-        <td>{{mspatients.edssdate}}</td>
-        <td>{{mspatients.walkrangetime}}</td>
-        <td>{{mspatients.walkrangedist}}</td>
-        <td>{{mspatients.walkrangeeval}}</td>
-        <td>{{mspatients.pregnant}}</td>
-        <td>{{mspatients.smoker}}</td>
-        <td>{{mspatients.cigperday}}</td>
-        <td>{{mspatients.smokersince}}</td>
-        <td>{{mspatients.onsetlocal}}</td>
-        <td>{{mspatients.onsetsympt}}</td>
-        <td>{{mspatients.personcompleting}}</td>
-
-
+        <td>{{mspatient.studyid}}</td>
+        <td>{{mspatient.formdate}}</td>
+        <td>{{mspatient.name}}</td>
+        <td>{{mspatient.surname}}</td>
+        <td>{{mspatient.address}}</td>
+        <td><a href="{% url 'main:registryentry' mspatient.studyid %}">View</a></td>
     </tr>
+  </tbody>
 {% endfor %}
 
 </table>
 <script>
     $(document).ready( function () {
     $('#table_id').DataTable();
-} ); </script>
+} ); </script> 
+
 
 
 {% endblock %}

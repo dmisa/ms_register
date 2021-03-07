@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import IntegerField, DateField,TimeField, BooleanField,CharField, Model
 
-class mspatient(models.Model):
+class Mspatient(models.Model):
     ms_choices=(
         ('RR','Relapsing-remitting MS'),
         ('SP','Secondary progressive MS'),
@@ -59,9 +59,10 @@ class mspatient(models.Model):
         ('Other','Other'),        
     )
     name = models.CharField(max_length=30)
+    surname = models.CharField(max_length=30,default='')
     address = models.CharField(max_length=30)
     formdate = models.DateField()
-    studyid = models.CharField(max_length=6)
+    studyid = models.CharField(max_length=6,primary_key=True)
 
     ms_now = models.CharField(max_length=10,choices=ms_choices)
     conv_to_sp=models.CharField(max_length=20)
@@ -90,3 +91,6 @@ class mspatient(models.Model):
     onsetlocal = models.CharField(max_length=30,choices=onsetlocal_choices,null=True)
     onsetsympt = models.CharField(max_length=30,choices=onsetsympt_choices,null=True)
     personcompleting=CharField(max_length=30,null=True,blank=True)
+
+    def __str__(self):
+        return (self.studyid + 'of patient' + self.name + self.surname)
