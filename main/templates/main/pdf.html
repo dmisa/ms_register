@@ -1,7 +1,5 @@
 {% load static %}
 
-
-{% block content %}
 <link href="{% static 'main/sidebar.css'%}" rel="stylesheet">
 
         <div class="row ">
@@ -166,18 +164,3 @@
     </div>
 
 
-
-
-
-
-  <script>
-    $( document ).ready(function() {
-      $("#table_id td").each(function() {
-       var text = $(this).text();
-       if(text==="None"){
-        $(this).parent().hide();
-       }
-});
-    });
-  </script>
-{% endblock %}
