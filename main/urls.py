@@ -25,7 +25,7 @@ urlpatterns = [
     path('removedoctor/<str:id>',views.removegrouptouser,name="removegrouptouser"),
     path('denyapplication/<str:id>',views.denyapplication,name="denyapplication"),
     path('profile/',views.profile,name="profile"),
-    path('pdf/<str:id>',views.render_pdf_view,name="pdf"),
+    path('pdf/<str:id>/<str:sid>',views.render_pdf_view,name="pdf"),
     path('regmailpatient/',views.email_reg_patient,name="emailreg"),
     path('doctorformauth/',views.doctor_form_submit,name="docformsubmit"),
 
