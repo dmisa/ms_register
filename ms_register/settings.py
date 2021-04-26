@@ -176,7 +176,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'testmsreg@gmail.com'
-EMAIL_HOST_PASSWORD = 'msregistry123'
+EMAIL_HOST_PASSWORD = 'msregistry1234'
 EMAIL_SUBJECT_PREFIX = 'AllAuth Tutorial'
 
 AUTH_USER_MODEL = 'users.User'
