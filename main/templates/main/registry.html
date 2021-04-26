@@ -1,40 +1,95 @@
 {% extends 'main/main_template.html' %}
+{% load static %}
+
 
 {% block content %}
+<link href="{% static 'main/sidebar.css'%}" rel="stylesheet">
 
+    <div class="row">
+      {% include 'main/sidebar.html' %}
+      <div class="asbcontent col-md-10 col-sm-12 mt-3">
+        <div class="row ">
+          <p class="fs-2 bg-white border w-auto shadow-sm">MyPatients</p>
 
-<a href="{% url 'main:caseform' %}"><h1>vale enan astheni!</h1></a>
+        </div>
 
-<table id="table_id" class="display">
-<thead>
-  <tr>
-    <th>studyid</th>
-    <th>formdate</th>
-    <th>name</th>
-    <th>surname</th>
-    <th>address</th>
-    <th>ena<th>
-  </tr>
-</thead>
-<tbody>
-{% for mscase in mscases %}
-    <tr>
-        <td>{{mscase.studyid}}</td>
-        <td>{{mscase.formdate}}</td>
-        <td>{{mscase.name}}</td>
-        <td>{{mscase.surname}}</td>
-        <td>{{mscase.address}}</td>
-        <td><a href="{% url 'main:registryentry' mscase.studyid %}">View</a></td>
-    </tr>
-  </tbody>
-{% endfor %}
+        <div class="row justify-content-center">
 
-</table>
+          <div class=" col-xl-12 col-xxl-9 bg-white shadow-sm pt-5  mb-5">
+            <table id="table_id" class="table table-bordered table-striped border-top table-hover" style="width: 100%;" >
+              <thead>
+                <tr>
+                  <th>Patient ID</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Address</th>
+                  <th>Date created</th>
+                  <th>Created by</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for mspatient in mspatients %}
+
+              <tr>
+                  <td>{{mspatient.id}}</td>
+                  <td>{{mspatient.name}}</td>
+                  <td>{{mspatient.surname}}</td>
+                  <td>{{mspatient.address}}</td>
+                  <td>{{mspatient.datecreated}}</td>
+                  <td>{{mspatient.createdby}}</td>
+
+                  <td>
+
+                    <a data-bs-toggle="tooltip" title="View this patient" href="{% url 'main:patientsentry' mspatient.id %}"><i class="fas fa-eye"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp
+                    <a data-bs-toggle="tooltip" title="Edit this patient" href="{% url 'main:update_patientform' mspatient.id %}"><i class="fas fa-pen"></i></a>
+                    &nbsp&nbsp&nbsp&nbsp
+                    <span data-bs-toggle="tooltip" data-placement="top" title="Delete this patient">
+                      <a href="" class="text-decoration-none"  data-bs-toggle="modal" data-bs-target="#deletepatientmodal{{mspatient.id}}" >
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </span>
+                    &nbsp&nbsp&nbsp&nbsp
+                    <a data-bs-toggle="tooltip" title="New case of patient" href="{% url 'main:patientcaseform' mspatient.id %}"><i class="fas fa-plus-square"></i></i></a>
+                  </td>
+                  {% include 'main/modals/deletepatient.html'%}
+
+              </tr>
+              {% endfor %}
+            </tbody>
+            </table>
+            <div class="row justify-content-center">
+                <a href="{% url 'main:patientform' %}"class="col-4 btn btn-primary mb-2">Add new patient</a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
 <script>
-    $(document).ready( function () {
-    $('#table_id').DataTable();
-} ); </script> 
+  $(document).ready( function () {
+    $('#table_id').DataTable({
+      responsive: true
+    });
+    $('#dashboard-sidebar').addClass( "collapsed" );
+    $('#dashboard-sidebar').removeClass( "collapse show" );
+    $('#dashboard-sidebar').attr("aria-expanded","false");
+    $('#dashboard-collapse').removeClass("collapse-show");
+    $('#dashboard-collapse').addClass( "collapse" );
+    $('#database-sidebar').removeClass( "collapsed" );
+    $('#database-sidebar').addClass( "collapse show" );
+    $('#database-sidebar').attr("aria-expanded","true");
+    $('#database-collapse').addClass("collapse-show");
+    $('#database-collapse').removeClass( "collapse" );
+    $("a[href$='/registry/']").addClass("bg-primary")
+  } );
 
+
+
+</script>
 
 
 {% endblock %}

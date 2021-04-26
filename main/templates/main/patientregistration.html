@@ -1,0 +1,62 @@
+{% extends 'main/main_template.html' %}
+{% load static %}
+{% block content %}
+<div class="row ">
+    {% include 'main/sidebar.html' %}
+    <div class="asbcontent col-md-10 col-sm-12 ">
+
+      <div class="row justify-content-center mt-3">
+
+        <div class="sendmail card text-dark yes p-0 ipick col-md-6 col-sm-12">
+          <div class="card-header  bg-white">
+            <h5 class="card-title text-center w-100">Send mail to patient to register online!</h5>
+          </div>
+          <div class="card-body">
+
+            <form method="POST" action="{% url 'main:emailreg' %}" >
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+              {{ form.source.errors }}
+              {{ form.source }}
+              <div class="mb-3 mx-4">
+                <label for="exampleFormControlInput1" class="form-label ">Email address</label>
+                <input type="email" name="patientmail" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+              <div class="row w-100 justify-content-end mb-3">
+                <button type="submit" class="btn btn-success col-5">
+                  Send registration mail!
+                </button>
+              </div>
+
+            </form>
+          </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable({
+      responsive: true
+    });
+    $('#dashboard-sidebar').addClass( "collapsed" );
+    $('#dashboard-sidebar').removeClass( "collapse show" );
+    $('#dashboard-sidebar').attr("aria-expanded","false");
+    $('#dashboard-collapse').removeClass("collapse-show");
+    $('#dashboard-collapse').addClass( "collapse" );
+    $('#more-sidebar').removeClass( "collapsed" );
+    $('#more-sidebar').addClass( "collapse show" );
+    $('#more-sidebar').attr("aria-expanded","true");
+    $('#more-collapse').addClass("collapse-show");
+    $('#more-collapse').removeClass( "collapse" );
+    $("a[href$='/regmailpatient/']").addClass("bg-primary")
+  } );
+
+
+
+</script>
+
+{% endblock %}

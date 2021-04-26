@@ -1,25 +1,54 @@
 {% load static %}
 
-<link rel=“icon” href=“{% static 'main/favicon.ico' %}”>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="{% static 'main/favicon.ico' %}" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="row">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark ">
+    <div class="col-2" id="headernav">
+      <div class="navbar-header">
+        <a class=" navbar-brand d-none d-sm-block " href="{% url 'main:homepage' %}">
+          <img class="main-icon" src="{% static 'main/brand.png' %}" alt="">
+        </a>
+      </div>
+    </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
+      {% if user.is_authenticated %}
+      <div class="col-10" id="navitems">
+      <div class="collapse navbar-collapse bg-dark b-0 " id="navbarcollapse">
+        <div id="navsearch">
+          {% include 'main/search.html' %}
+
+        </div>
+        <ul class="nav navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a  class="fs-4 nav-link dropdown-toggle text-white" href="#" id="userdropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> {{ user.email }}
+            </a>
+            <div class="dropdown-menu w-100" aria-labelledby="userdropdown">
+              <a class="dropdown-item fs-5" href="{% url 'main:profile' %}">User Settings</a>
+              <a class="dropdown-item fs-5" href="" data-bs-toggle="modal" data-bs-target="#logoutmodal">Logout</a>
+            </div>
           </li>
         </ul>
       </div>
-
       </div>
+      {% else %}
+      <div class="collapse navbar-collapse bg-dark"  id="navbarcollapse">
+        <ul class="nav navbar-nav  ms-auto">
+          <li class="nav-item">
+            <a class="nav-link fs-4 text-dark bg-white border border-info rounded" href="" data-bs-toggle="modal" data-bs-target="#loginmodal">Login</a>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <a class="nav-link fs-4 text-white disabled">|</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link fs-4 text-white" href="{% url 'account_signup' %}">Sign Up</a>
+          </li>   
+          
+        </ul>
+      {% endif %}       
     </div>
   </nav>
+</div>
+{% include 'main/modals/loginmodal.html'%}
+{% include 'main/modals/logoutmodal.html'%}

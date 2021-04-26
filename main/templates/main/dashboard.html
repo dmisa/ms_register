@@ -1,0 +1,179 @@
+{% extends 'main/main_template.html' %}
+
+{% block content %}
+
+{% load socialaccount %}
+{% load static %}
+
+<div class="row">
+  {% include 'main/sidebar.html' %}
+  <div class="asbcontent col-md-10 col-sm-12 ">
+    <div class="row justify-content-between mt-3">
+      <div class="col-md-4 col-sm-12">
+          <div class="card  shadow-sm text-center mb-3" id="total-orders">
+              <div class="card-header">
+                <h5 class="card-title">Your Total Patients</h5>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{total_patients}}</h3>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="card  shadow-sm text-center   mb-3" id="orders-delivered">
+          <div class="card-header">
+            <h5 class="card-title">Your Total Cases</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{total_cases}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="card  shadow-sm text-center    mb-3" id="orders-pending">
+            <div class="card-header">
+              <h5 class="card-title">Average age</h5>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">{{average_age}}</h3>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    {% if last_5_mspatients %}
+    <div class="row">
+      <div id="container" class="col-12 d-none d-sm-block" >
+        <div class="card  shadow-sm  text-center mb-3" id="orders-pending">
+          <div class="card-header">
+            <h5 class="card-title">LAST 5 PATIENTS</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-sm">
+              <tr>
+                <th>Patient ID</th>
+                <th>Date created</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for last_5_mspatient in last_5_mspatients %}
+                  <tr>
+                      <td>{{last_5_mspatient.id}}</td>
+                      <td>{{last_5_mspatient.datecreated}}</td>
+                      <td>{{last_5_mspatient.name}}</td>
+                      <td>{{last_5_mspatient.surname}}</td>
+                      <td>{{last_5_mspatient.address}}</td>
+                  </tr>
+                </tbody>
+              {% endfor %}
+          </table>
+          </div>
+        </div> 
+      </div>
+    </div>
+    {% endif %}
+    {% if mscases %}
+    <div class="row justify-content-between">
+      <div id="container" class="col-md-6 col-sm-12" >
+        <div class="card  shadow-sm  text-center mb-3" id="orders-pending">
+          <div class="card-header">
+            <h5 class="card-title">MS NOW TYPES</h5>
+          </div>
+          <div class="card-body">
+            <canvas id="MS_NOW_PIE"></canvas>
+          </div>
+        </div>  
+      </div>
+      <div id="container" class="col-md-6 col-sm-12" >
+        <div class="card  shadow-sm  text-center mb-3" id="orders-pending">
+          <div class="card-header">
+            <h5 class="card-title">SEVERITY OF CASES</h5>
+          </div>
+          <div class="card-body">
+            <canvas id="SEVERITY_DOHNUT"></canvas>
+          </div>
+        </div>  
+      </div>
+    </div>
+    {% endif %}
+    {% if last_5_mscases %}
+    <div class="row">
+        <div id="container" class="col-12  d-none d-sm-block" >
+          <div class="card  shadow-sm  text-center mb-3" id="orders-pending">
+            <div class="card-header">
+              <h5 class="card-title">LAST 5 CASES</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                <tr>
+                  <th>Patient</th>
+                  <th>studyid</th>
+                  <th>formdate</th>
+                  <th>View more</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for last_5_mscase in last_5_mscases %}
+                  <tr>
+                    <td><a  data-bs-toggle="tooltip" title="View this paatient" class="text-decoration-none text-primary" href="{% url 'main:patientsentry' last_5_mscase.mspatient.id %}">{{last_5_mscase.mspatient.name}} {{last_5_mscase.mspatient.surname}}</a></td>
+                    <td>{{last_5_mscase.studyid}}</td>
+                    <td>{{last_5_mscase.formdate}}</td>
+                    <td class="text-center"><a  data-bs-toggle="tooltip" title="View this case" href="{% url 'main:caseentry' last_5_mscase.mspatient.id last_5_mscase.studyid  %}"><i class="fas fa-eye"></i></a></td>
+                  </tr>
+                </tbody>
+              {% endfor %}
+            </table>
+            </div>
+          </div>  
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+  var config = {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: {{ datasev|safe }},
+        backgroundColor: [
+          '#343a40', '#0d6efd', '#87EC2C', '#BE2CEC'],
+        label: 'SEVERITY'
+      }],
+      labels: {{ labelssev|safe }}
+    },
+    options: {
+      responsive: true
+    }
+  };
+  var config2 = {
+    type: 'pie',
+    data: {
+      datasets: [{
+        data: {{ datamsnow|safe }},
+        backgroundColor: [
+          '#343a40', '#87EC2C', '#0d6efd', '#BE2CEC'],
+        label: 'TYPE OF MS NOW'
+      }],
+      labels: {{ labelsmsnow|safe }}
+    },
+    options: {
+      responsive: true
+    }
+  };
+
+  window.onload = function() {
+    var ctx = document.getElementById('SEVERITY_DOHNUT').getContext('2d');
+    window.myDoughnut = new Chart(ctx, config);
+    var ctx2 = document.getElementById('MS_NOW_PIE').getContext('2d');
+    window.myPie = new Chart(ctx2, config2);
+  };
+</script>
+
+
+{% endblock %}

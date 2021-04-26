@@ -1,0 +1,5 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hello from MSREGISTRY!{% endblocktrans %}
+
+{% block content %}{% endblock %}
+
+{{ site_domain }}{% endautoescape %}

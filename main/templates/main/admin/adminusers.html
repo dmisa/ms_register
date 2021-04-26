@@ -1,0 +1,116 @@
+{% extends 'main/main_template.html' %}
+{% load hasgroup %}
+{% load hasapplied %}
+
+
+{% load static %}
+
+
+{% block content %}
+<link href="{% static 'main/sidebar.css'%}" rel="stylesheet">
+
+    <div class="row">
+      {% include 'main/sidebar.html' %}
+      <div class="asbcontent col-md-10 col-sm-12 mt-3">
+        <div class="row ">
+          <p class="fs-2 bg-white border w-auto shadow-sm">Control Users</p>
+
+        </div>
+
+        <div class="row justify-content-center">
+          <div class=" col-xl-12 col-xxl-9 bg-white shadow-sm pt-5  mb-5">
+            <table id="table_id" class="table table-bordered table-striped border-top table-hover" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>email</th>
+                    <th>name</th>
+                    <th>surname</th>
+                    <th>groups</th>
+                    <th>has applied?</th>
+                    <th>Add doctor</th>
+                    <th>Deny application</th>
+                    <th>Remove doctor</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                {% for user in users %}
+                    <tr>
+                        <td>{{user.email}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.surname}}</td>
+                        <td class=" text-center">
+                          {% if user.groups.all%}
+                            {% for group in user.groups.all %}
+                              {{ group }}
+                            {% endfor %}
+                          {%else%}
+                          <a  data-bs-toggle="tooltip" title="No groups"><i class="fas fa-users-slash text-danger"></i></a>
+                          {%endif%}
+                        </td>
+                        {% if user|has_group:"doctor" %}
+                          <td class=" text-center">Already Doctor</td>
+                          <td >
+                            <a class="btn btn-secondary disabled" href="{% url 'main:addgrouptouser' user.id %}">Make him doctor</a>
+                          </td>
+                          <td class=" text-center">Already Doctor</td>
+                          <td>
+                            <a class="btn btn-danger" href="{% url 'main:removegrouptouser' user.id %}">remove doctor</a>
+                          </td>
+                        {% else %}
+                          {% if user|hasapplied%}
+                            <td class=" text-center"><i class="fas fa-check-circle text-success"></i></td>
+                            <td>
+                              <a class="btn btn-primary" href="{% url 'main:addgrouptouser' user.id %}">Make him doctor</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-danger" href="{% url 'main:denyapplication' user.id %}">Deny Application</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-danger disabled" href="{% url 'main:removegrouptouser' user.id %}">Remove doctor</a>
+                            </td>
+                          {% else %}
+                            <td class=" text-center"><i class="fas fa-times-circle text-danger"></i></td>
+                            <td>
+                              <a class="btn btn-secondary disabled" href="{% url 'main:addgrouptouser' user.id %}">Make him doctor</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-danger disabled" href="{% url 'main:denyapplication' user.id %}">Deny Application</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-danger disabled" href="{% url 'main:removegrouptouser' user.id %}">remove doctor</a>
+                            </td>
+                          {% endif%}
+                        {% endif %}
+
+                  </tr>
+                  {% endfor %}
+
+                  </tbody>
+            </table>
+            </div>
+            </div>
+            </div>
+            </div>
+            
+    
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable({
+      responsive:true
+
+    });
+    $('#dashboard-sidebar').addClass( "collapsed" );
+    $('#dashboard-sidebar').removeClass( "collapse show" );
+    $('#dashboard-sidebar').attr("aria-expanded","false");
+    $('#dashboard-collapse').removeClass("collapse-show");
+    $('#dashboard-collapse').addClass( "collapse" );
+    $('#admin-sidebar').removeClass( "collapsed" );
+    $('#admin-sidebar').addClass( "collapse show" );
+    $('#admin-sidebar').attr("aria-expanded","true");
+    $('#admin-collapse').addClass("collapse-show");
+    $('#admin-collapse').removeClass( "collapse" );
+    $("a[href$='/adminusers/']").addClass("bg-primary")
+} );
+</script>
+{% endblock %}

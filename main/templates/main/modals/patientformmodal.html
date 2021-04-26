@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="modal fade" id="patientformmodal" tabindex="-1" aria-labelledby="patientformmodallabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="patientformmodallabel">Create a new Patient</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+
+
+
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        {{form.as_p}}                        
+                        {% endif %}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Create Patient</button>
+                        </div>
+                    </form>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+{% extends "account/base.html" %}
+{% load static %}
+
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+	<div class="card loginsignup-form col-md-6 col-12 mt-4">
+	<div class="card-body">
+		<h3 class="card-title text-center">Sign Up as a doctor with MS-Register</h3>
+
+		<div class="card-text">
+      <form class="signup needs-validation" id="signup_form" method="post" action="{% url 'account_signup' %}" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_email">Email address</label>
+          <input type="email" name="email" class="form-control" placeholder="E-mail address" autocomplete="email" required="" id="id_email">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please provide a valid mail!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_name">Name</label>
+          <input type="text" class="form-control" placeholder="Name" name="name" maxlength="30" required="" id="id_name">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please provide a valid name!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_surname">Surname</label>
+          <input type="text" name="surname" placeholder="Surname" maxlength="30" required="" id="id_surname" class="form-control">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please provide a valid surname!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_password1">Password</label>
+          <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required="" id="id_password1" class="form-control">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please provide a valid password!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="id_password2">Passwordagain</label>
+          <input type="password" name="password2" placeholder="Password (again)" required="" id="id_password2" class="form-control">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Passwords do not look the same!
+          </div>
+        </div>
+				<div class="log-in">
+					Already have an account? Then please <a href="{{ login_url }}">login</a>
+
+				</div>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+                  <div class="alert alert-danger mb-1">
+                      {{ error|escape }}
+                  </div>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <div class="alert alert-danger mb-1">
+                  {{ error|escape }}
+              </div>
+          {% endfor %}
+        {% endif %}
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">{% trans "Sign Up" %} &raquo;</button>
+        </div>
+      </form>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}

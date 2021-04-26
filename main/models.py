@@ -1,5 +1,21 @@
 from django.db import models
 from django.db.models import IntegerField, DateField,TimeField, BooleanField,CharField, Model
+from users.models import User
+
+class DoctorApplication(models.Model):
+    user=models.ForeignKey(User,editable=False, null=True,blank=True, on_delete= models.SET_NULL)
+    datecreated = models.DateField(auto_now_add=True)
+    approved=models.BooleanField(default=False)
+    reviewed=models.BooleanField(default=False)
+
+class Mspatient(models.Model):
+    name = models.CharField(max_length=30)
+    surname = models.CharField(max_length=30,default='')
+    address = models.CharField(max_length=30)
+    datecreated = models.DateField(auto_now_add=True)
+    createdby = models.ForeignKey(User,editable=False, null=True,blank=True, on_delete= models.SET_NULL)
+    def __str__(self):
+        return '%s %s' % (self.name,self.surname)
 
 class Mscase(models.Model):
     ms_choices=(
@@ -58,9 +74,11 @@ class Mscase(models.Model):
         ('Encephalopathy','Encephalopathy'),
         ('Other','Other'),        
     )
-    name = models.CharField(max_length=30)
-    surname = models.CharField(max_length=30,default='')
-    address = models.CharField(max_length=30)
+    yes_no=(
+        ('Yes','Yes'),
+        ('No','No')
+    )
+    mspatient = models.ForeignKey(Mspatient, null=True, on_delete= models.CASCADE)
     formdate = models.DateField()
     studyid = models.CharField(max_length=6,primary_key=True)
 
@@ -79,18 +97,24 @@ class Mscase(models.Model):
     presmoddatestart=models.DateField()
     edssscore=IntegerField()
     edssdate=DateField()
-    walkrangetime=TimeField()
+    walkrangetime=CharField(max_length=5)
     walkrangedist=IntegerField()
     walkrangeeval=models.CharField(max_length=20,choices=evaluation_choices)
 
 
-    pregnant=BooleanField(null=True)
-    smoker=BooleanField(null=True)
-    cigperday=IntegerField(null=True)
-    smokersince=IntegerField(null=True)
-    onsetlocal = models.CharField(max_length=30,choices=onsetlocal_choices,null=True)
-    onsetsympt = models.CharField(max_length=30,choices=onsetsympt_choices,null=True)
-    personcompleting=CharField(max_length=30,null=True,blank=True)
+    pregnant=models.CharField(max_length=20,choices=yes_no,null=True,blank=True)
+    smoker=models.CharField(max_length=20,choices=yes_no,null=True,blank=True)
+    cigperday=IntegerField(null=True,blank=True)
+    smokersince=IntegerField(null=True,blank=True)
+    onsetlocal = models.CharField(max_length=30,choices=onsetlocal_choices,null=True,blank=True)
+    onsetsympt = models.CharField(max_length=30,choices=onsetsympt_choices,null=True,blank=True)
 
+    comorbidities=models.CharField(max_length=20,choices=yes_no,null=True,blank=True)
+    ethnicity=models.CharField(max_length=20,null=True,blank=True)
+    age=IntegerField(null=True,blank=True)
+    race=models.CharField(max_length=20,null=True,blank=True)
+    
+
+    personcompleting=models.ForeignKey(User,editable=False, null=True, on_delete= models.CASCADE)
     def __str__(self):
-        return (self.studyid + 'of patient' + self.name + self.surname)
+        return 'Case #%s' % (self.studyid)

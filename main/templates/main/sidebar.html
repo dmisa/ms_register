@@ -1,0 +1,80 @@
+
+    {% load static %}
+    {% load hasgroup %}
+
+    <link href="{% static 'main/sidebar.css'%}" rel="stylesheet">
+
+    <div class="bg-dark col-2" id="sidebar" >
+      <ul class="list-unstyled ps-0 mt-3">
+        <div id="sidebarsearch" class="d-none">
+          {% include 'main/search.html' %}
+        </div>
+        {% if request.user|has_group:"doctor" %}
+        <li class="">
+          <button class="btn fs-4 btn-toggle align-items-center text-white" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true" id="dashboard-sidebar">
+            Dashboard
+          </button>
+          <div class="collapse-show" id="dashboard-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:patientform' %}" class="link-light fs-6"><i class="fas fa-laptop-medical"></i>&nbsp; New Patient</a></li>
+              <li><a href="{% url 'main:caseform' %}" class="link-light fs-6"><i class="fas fa-book-medical"></i>&nbsp; New Case</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="">
+          <button class="btn fs-4  btn-toggle align-items-center collapsed text-white " data-bs-toggle="collapse" data-bs-target="#database-collapse" aria-expanded="false" id="database-sidebar">
+            Database
+          </button>
+          <div class="collapse" id="database-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:registry' %}" class="link-light fs-6"><i class="fas fa-head-side-mask"></i>&nbsp; MyPatients</a></li>
+              <li><a href="{% url 'main:allcases' %}" class="link-light fs-6"><i class="fas fa-file-medical-alt"></i>&nbsp; MyCases</a></li>
+            </ul>
+          </div>
+        </li>
+        {%endif%}
+        <li class="">
+          <button class="btn fs-4 btn-toggle align-items-center collapsed text-white" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false" id="account-sidebar">
+            Account
+          </button>
+          <div class="collapse" id="account-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:profile' %}" class="link-light fs-6"><i class="fas fa-cogs"></i>&nbsp; Settings</a></li>
+              <li><a href="" data-bs-toggle="modal" data-bs-target="#logoutmodal" class="link-light fs-6"><i class="fas fa-sign-out-alt"></i>&nbsp;Sign out</a></li>
+            </ul>
+          </div>
+        </li>
+        {% if request.user|has_group:"doctor" %}
+        <li class="">
+          <button class="btn fs-4 btn-toggle align-items-center collapsed text-white" data-bs-toggle="collapse" data-bs-target="#more-collapse" aria-expanded="false" id="more-sidebar">
+            More
+          </button>
+          <div class="collapse" id="more-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:emailreg' %}" class="link-light fs-6"><i class="fas fa-envelope"></i>&nbsp; Send registration mail to patient</a></li>
+            </ul>
+          </div>
+        </li>
+        {%endif%}
+        {% if request.user|has_group:"admin" %}
+        <li class="">
+          <button class="btn fs-4 btn-toggle align-items-center collapsed text-white" data-bs-toggle="collapse" data-bs-target="#admin-collapse" aria-expanded="false" id="admin-sidebar">
+            Admin
+          </button>
+          <div class="collapse" id="admin-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:adminusers' %}" class="link-light fs-6"><i class="fas fa-users"></i>&nbsp; Add group to user</a></li>
+            </ul>
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:adminregistry' %}" class="link-light fs-6"><i class="fas fa-head-side-mask"></i>&nbsp; AllPatients</a></li>
+            </ul>
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="{% url 'main:adminallcases' %}" class="link-light fs-6"><i class="fas fa-file-medical-alt"></i>&nbsp; AllCases</a></li>
+            </ul>
+          </div>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+    {% include 'main/modals/logoutmodal.html'%}

@@ -1,0 +1,214 @@
+{% extends 'main/main_template.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+  {% include 'main/sidebar.html' %}
+  <div class="asbcontent col-md-10 col-sm-12 ">
+    <div class="row justify-content-center">
+      <div class="card mt-5 col-sm-12 col-md-10 justify-content-center">
+        <div class="card-body">
+          <h3 class="card-title text-center">Edit {{mscase.studyid}} MS Case</h3>  
+          <div class="card-text">
+            <div class="form-group asbcontent col-md-12 justify-content-center">
+                <form method="POST" class="needs-validation" id="createcase" novalidate>
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {{ form.source.errors }}
+                    {{ form.source }}
+                    <div class="accordion accordion" id="accordionForm">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button bg-success text-white" id="t1title" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Tier 1 (All fields to be completed)
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionForm">
+                            <div class="accordion-body">
+                                <div class="tier1" id="tier1" >
+                                    {{form.mspatient.label_tag}}
+                                    {{form.mspatient}}
+                                    {{form.formdate.label_tag}}
+                                    {{form.formdate}}
+                                    {{form.studyid.label_tag}}
+                                    {{form.studyid}}
+                                    {{form.ms_now.label_tag}}
+                                    {{form.ms_now}}
+                                    {{form.conv_to_sp.label_tag}}
+                                    {{form.conv_to_sp}}
+                                    {{form.date_diag.label_tag}}
+                                    {{form.date_diag}}
+                                    {{form.ms_diag.label_tag}}
+                                    {{form.ms_diag}}
+                                    {{form.date_onset.label_tag}}
+                                    {{form.date_onset}}
+                                    {{form.num_relapses.label_tag}}
+                                    {{form.num_relapses}}
+                                    {{form.severity.label_tag}}
+                                    {{form.severity}}
+                                    {{form.pastmodtreat.label_tag}}
+                                    {{form.pastmodtreat}}
+                                    {{form.pastmoddatestart.label_tag}}
+                                    {{form.pastmoddatestart}}
+                                    {{form.pastmodtreatstop.label_tag}}                    
+                                    {{form.pastmodtreatstop}}         
+                                    {{form.pastmodreason.label_tag}}                    
+                                    {{form.pastmodreason}}    
+                                    {{form.presmodtreat.label_tag}}         
+                                    {{form.presmodtreat}}
+                                    {{form.presmoddatestart.label_tag}}
+                                    {{form.presmoddatestart}}
+                                    {{form.edssscore.label_tag}}
+                                    {{form.edssscore}}
+                                    {{form.edssdate.label_tag}}
+                                    {{form.edssdate}}
+                                    {{form.walkrangetime.label_tag}}
+                                    {{form.walkrangetime}}
+                                    {{form.walkrangedist.label_tag}}
+                                    {{form.walkrangedist}}
+                                    {{form.walkrangeeval.label_tag}}
+                                    {{form.walkrangeeval}}
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed bg-light border-top text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Tier 2 (filled if patient not willing to signup online)
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionForm">
+                            <div class="accordion-body">
+                              <div class="d-flex flex-row bd-highlight mb-3">
+                                <p class="me-2">Is patient willing to register online?</p> 
+                                <div class="form-check form-check-inline  novalidate">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="yes" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      Yes
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-inline novalidate">
+                                    <input class="form-check-input " value="no" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                      No
+                                    </label>
+                                  </div>
+                              </div>
+                              <a class="yes ipick btn btn-secondary" target="_blank" href="{% url 'main:emailreg' %}">Send a registration email</a>
+
+                                  <div class="tier2 no ipick">
+                                      {{form.pregnant.label_tag}}
+                                      {{form.pregnant.errors}}
+                                      {{form.pregnant}}
+                                      {{form.smoker.label_tag}}
+                                      {{form.smoker.errors}}
+                                      {{form.smoker}}
+                                      {{form.cigperday.label_tag}}
+                                      {{form.cigperday.errors}}
+                                      {{form.cigperday}}
+                                      {{form.smokersince.label_tag}}
+                                      {{form.smokersince.errors}}
+                                      {{form.smokersince}}
+                                      {{form.onsetlocal.label_tag}}
+                                      {{form.onsetlocal.errors}}
+                                      {{form.onsetlocal}}
+                                      {{form.onsetsympt.label_tag}}
+                                      {{form.onsetsympt.errors}}
+                                      {{form.onsetsympt}}
+                                  </div>        
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed bg-light border-top text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              Tier 3 (filled with patient's consent)
+                            </button>
+                          </h2>
+                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionForm">
+                            <div class="accordion-body">
+                              <div class="tier3">
+                                  {{form.comorbidities.label_tag}}
+                                  {{form.comorbidities.errors}}
+                                  {{form.comorbidities}}
+                                  {{form.ethnicity.label_tag}}
+                                  {{form.ethnicity.errors}}
+                                  {{form.ethnicity}}
+                                  {{form.age.label_tag}}
+                                  {{form.age.errors}}
+                                  {{form.age}}
+                                  {{form.race.label_tag}}
+                                  {{form.race.errors}}
+                                  {{form.race}}
+                              </div>        
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                <div class="row justify-content-center">
+                    <button class=" col-sm-12 col-md-3 btn btn-primary fs-6" type="submit" name="submit">Save case <i class="fas fa-save"></i></button>
+                </div>
+
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                  Form has errors.  the form to fix them.
+                </div>
+                {% endif %}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var counter=0;
+  $('#createcase').on('submit',function(){
+    $( "#t1title" ).removeClass( "bg-light text-dark invalid-feedback");
+
+    $( "#t1title" ).addClass( "bg-danger text-white invalid-feedback");
+    if(counter<=0){
+      $( "#t1title").append('<i class="fas fa-exclamation"></i>');
+      $(".fas.fa-exclamation").css("margin-left","auto");
+      counter++;
+    }
+  });
+</script>
+
+
+<script>
+  $(document).ready(function(){
+    $(".yes.ipick").hide();
+    $('input[type="radio"]').click(function(){
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".ipick").not(targetBox).hide();
+        $(targetBox).show();
+    });
+});
+</script>
+
+<script>
+    $(document).ready( function () {
+
+      $( "#id_mspatient" ).prop( "disabled", true );
+      $("#id_studyid").prop( "disabled", true );
+      $("#id_formdate").prop( "disabled", true );
+
+      $("a[href$='/caseform/']").addClass("bg-primary")
+  } );
+</script>
+<style>
+  #t1title.accordion-button.collapsed.bg-danger.text-white.invalid-feedback::after{
+    margin-left:3px;
+  }
+  #t1title.accordion-button.bg-danger.text-white.invalid-feedback::after{
+    margin-left:3px;
+  }
+
+</style>
+{% endblock %}

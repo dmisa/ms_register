@@ -1,0 +1,117 @@
+{% extends "main/main_template.html" %}
+{% load static %}
+{% load hasgroup %}
+
+
+{% block content %}
+
+<div class="row">
+  {% include 'main/sidebar.html' %}
+  <div class="asbcontent col-md-10 col-sm-12 ">
+    <div class="row">
+      <p class="fs-2 bg-white border w-auto shadow-sm">Account Settings</p>
+    </div>
+    <div class="row mt-3">
+          <div class="col-md-6 text-center">
+            <div class="card mb-3 shadow-sm">
+              <div class="card-body">
+                <h1 class="card-title">My profile</h1>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{request.user.name}} {{request.user.surname}}
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{request.user.email}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Doctor?</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {% if request.user|has_group:"doctor" %}
+                    <i class="fas fa-check-square fs-1" style="color:green;"></i>                
+                    {% else %}
+                    <i class="fas fa-window-close fs-1" style="color:red;"></i>          
+                    {% endif %}
+                  </div>              
+                </div>
+                <hr>
+                {% if request.user|has_group:"doctor" %}
+                {% else %}
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Want to email admin to get doctor privileges?</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <a class="btn btn-primary mt-1" href="mailto:EMAILADDRESS">E-mail</a>
+                  </div>              
+                </div>
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card text-center shadow-sm">
+            <div class="card-body">
+              <h1 class="card-title">Actions</h1>
+              <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Change your email</h5>
+                <p class="card-text"></p>
+                <a href="{% url 'account_email' %}" class="btn btn-primary">Change E-Mail</a>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Sign out from MS Register</h5>
+                <a data-bs-toggle="modal" data-bs-target="#logoutmodal" class="btn btn-primary">Sign Out</a>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Change password</h5>
+                <p class="card-text"></p>
+                <a href="{% url 'account_set_password' %}" class="btn btn-primary">Change your password</a>
+              </div>
+            </div>
+            </div>
+            </div>
+            </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+  $(document).ready( function () {
+    $('#dashboard-sidebar').addClass( "collapsed" );
+    $('#dashboard-sidebar').removeClass( "collapse show" );
+    $('#dashboard-sidebar').attr("aria-expanded","false");
+    $('#dashboard-collapse').removeClass("collapse-show");
+    $('#dashboard-collapse').addClass( "collapse" );
+    $('#account-sidebar').removeClass( "collapsed" );
+    $('#account-sidebar').addClass( "collapse show" );
+    $('#account-sidebar').attr("aria-expanded","true");
+    $('#account-collapse').addClass("collapse-show");
+    $('#account-collapse').removeClass( "collapse" );
+    $("a[href$='/profile/']").addClass("bg-primary")
+
+  } );
+</script>
+{% endblock %}

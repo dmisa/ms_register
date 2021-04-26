@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="modal fade" id="deletecasemodal{{mscase.studyid}}" tabindex="-1" aria-labelledby="deletecasemodallabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deletecasemodallabel">Do you want to delete {{mscase}}?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'main:delete_caseform' mscase.studyid %}" method="POST">
+                {% csrf_token %}
+                <div class="row justify-content-between">
+                    <a class="col-3 text-white bg-danger text-decoration-none btn btn-danger" href="" data-bs-dismiss="modal" aria-label="Close">cancel</a>
+                    <input type="submit" class="col-7 btn btn-primary" value="Delete">
+
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

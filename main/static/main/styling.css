@@ -1,0 +1,119 @@
+.navbar{
+    background: #e7e7e7;
+}
+
+.mb-4.display-3.fw-bold{
+    color:#008a8a;
+}
+
+.main-icon{
+    object-fit: contain;
+    width: 9em;
+    height:auto;
+}
+
+.profile{
+    height:70px;
+    margin-right:0.2em;
+}
+
+
+@media screen and (max-width: 800px) {
+    #navsearch{
+        display: none !important;
+    }
+    #sidebarsearch{
+        display: block !important;
+    }
+	#navlogin{
+		margin-top:3px;
+	}
+  }
+
+html,body { 
+	height: 100%; 
+	overflow: auto;
+	margin-left: calc(100vw - 100%);
+    margin-right: 0;
+}
+
+.global-container{
+    margin-top: 5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color:white;
+}
+
+form{
+	padding-top: 10px;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.card-title{ font-weight:300; }
+
+.btn{
+	font-size: 14px;
+	margin-top:20px;
+}
+
+
+
+
+.sign-up{
+	text-align:center;
+	padding:20px 0 0;
+}
+.log-in{
+	text-align:center;
+	padding:20px 0 0;
+}
+.alert{
+	margin-bottom:-30px;
+	font-size: 13px;
+	margin-top:20px;
+}
+
+.controlWrapperStyle.html-duration-picker-wrapper{
+	width:100% !important;
+}
+.form-control.html-duration-picker.pickerStyles{
+	text-align:left !important;
+}
+
+.form-control.novalidate:valid {
+    border-color: #ced4da;
+    padding-right: .75rem;
+    background: none;
+}
+
+.form-check-input.is-valid, .was-validated .form-check-input:valid{
+	border-color:grey;
+}
+.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked{
+	background-color:#0d6efd ;
+	border-color:#0d6efd ;
+}
+.form-check-input.is-valid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+	color:black;
+}
+
+.scrollStyle.scroll-down{
+	top:18px!important;
+	height: 18px!important;
+
+}	
+.scrollStyle.scroll-up{
+	top:1px!important;
+	height: 18px!important;
+
+}	
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before{
+	background-color:#0d6efd
+}
+
+div.dataTables_filter, div.dataTables_length {
+	padding-bottom: 2rem!important;
+  }
