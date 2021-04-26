@@ -341,11 +341,12 @@ def profile(request):
 
 @login_required
 @allowed_users(allowed_roles=['admin','doctor'])
-def render_pdf_view(request,id):
+def render_pdf_view(request,id,sid):
     template_path = 'main/pdf.html'
-    mscase=Mscase.objects.get(studyid=id)
+    mspatient = Mspatient.objects.get(id=id)
+    mscase= Mscase.objects.get(studyid=sid)
 
-    context = {'mscase': mscase}
+    context = {'mscase': mscase,'mspatient':mspatient}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="report.pdf"'
