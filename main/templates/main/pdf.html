@@ -1,5 +1,183 @@
 {% load static %}
 
+
 {% block content %}
-<h1>{{mscase.studyid}}S</h1>
+<link href="{% static 'main/sidebar.css'%}" rel="stylesheet">
+
+        <div class="row ">
+          <p class="fs-2 bg-white border w-auto shadow-sm">Case #{{mscase.studyid}}</p>
+
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-xl-12 col-xxl-9 bg-white shadow-sm ">
+            <div class="row pt-2 justify-content-between">
+              <p class="fs-3 col-10">Case Results</p>
+              <hr>
+
+            </div>
+
+            <table id="table_id" class="table table-bordered table-hover mt-5">
+              <tr>
+                <th>name</th>
+                <td>{{mspatient.name}}</td>
+              </tr>
+            
+              <tr>
+                <th>surname</th>
+                <td>{{mspatient.surname}}</td>
+              </tr>
+              <tr>
+                <th>address</th>
+                <td>{{mspatient.address}}</td>
+              </tr>
+              <tr>
+                <th>formdate</th>
+                <td>{{mscase.formdate}}</td>
+              </tr>
+              <tr>
+                <th>studyid</th>
+                <td>{{mscase.studyid}}</td>
+              </tr>
+              <tr>    
+                <th>ms_now</th>
+                <td>{{mscase.ms_now}}</td>
+              </tr>
+              <tr>
+                <th>conv_to_sp</th>
+                <td>{{mscase.conv_to_sp}}</td>
+              </tr>
+              <tr>
+                <th>date_diag</th>
+                <td>{{mscase.date_diag}}</td>
+              </tr>
+              <tr>
+                <th>ms_diag</th>
+                <td>{{mscase.ms_diag}}</td>
+              </tr>
+              <tr>
+                <th>date_onset</th>
+                <td>{{mscase.date_onset}}</td>
+              </tr>
+              <tr>
+                <th>num_relapses</th>
+                <td>{{mscase.num_relapses}}</td>
+              </tr>
+              <tr>
+                <th>severity</th>
+                <td>{{mscase.severity}}</td>
+              </tr>
+              <tr>
+                <th>pastmodtreat</th>
+                <td>{{mscase.pastmodtreat}}</td>
+              </tr>
+              <tr>
+                <th>pastmoddatestart</th>
+                <td>{{mscase.pastmoddatestart}}</td>
+              </tr>
+              <tr>
+                <th>pastmodtreatstop</th>
+                <td>{{mscase.pastmodtreatstop}}</td>
+              </tr>
+              <tr>
+                <th>pastmodtreatstop</th>
+                <td>{{mscase.pastmodtreatstop}}</td>
+              </tr>
+              <tr>
+                <th>pastmodreason</th>
+                <td>{{mscase.pastmodreason}}</td>
+              </tr>
+              <tr>
+                <th>presmodtreat</th>
+                <td>{{mscase.presmodtreat}}</td>
+              </tr>
+              <tr>
+                <th>presmoddatestart</th>
+                <td>{{mscase.presmoddatestart}}</td>
+              </tr>
+              <tr>
+                <th>edssscore</th>
+                <td>{{mscase.edssscore}}</td>
+              </tr>
+              <tr>
+                <th>edssdate</th>
+                <td>{{mscase.edssdate}}</td>
+              </tr>
+              <tr>
+                <th>walkrangetime</th>
+                <td>{{mscase.walkrangetime}}</td>
+              </tr>
+              <tr>
+                <th>walkrangedist</th>
+                <td>{{mscase.walkrangedist}}</td>
+              </tr>
+              <tr>
+                <th>walkrangeeval</th>
+                <td>{{mscase.walkrangeeval}}</td>
+              </tr>
+              <tr>
+                <th>pregnant</th>
+                <td>{{mscase.pregnant}}</td>
+              </tr>
+              <tr>
+                <th>smoker</th>
+                <td>{{mscase.smoker}}</td>
+              </tr>
+              <tr>
+                <th>cigperday</th>
+                <td>{{mscase.cigperday}}</td>
+              </tr>
+              <tr>
+                <th>smokersince</th>
+                <td>{{mscase.smokersince}}</td>
+              </tr>
+              <tr>
+                <th>onsetlocal</th>
+                <td>{{mscase.onsetlocal}}</td>
+              </tr>
+              <tr>
+                <th>onsetsympt</th>
+                <td>{{mscase.onsetsympt}}</td>
+              </tr>
+              <tr>
+                <th>comorbidities</th>
+                <td>{{mscase.comorbidities}}</td>
+              </tr>
+              <tr>
+                <th>ethnicity</th>
+                <td>{{mscase.ethnicity}}</td>
+              </tr>
+              <tr>
+                <th>age</th>
+                <td>{{mscase.age}}</td>
+              </tr>
+              <tr>
+                <th>race</th>
+                <td>{{mscase.race}}</td>
+              </tr>
+              <tr>
+                <th>personcompleting</th>
+                <td>{{mscase.personcompleting}}</td>
+              </tr>
+            </table>
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  <script>
+    $( document ).ready(function() {
+      $("#table_id td").each(function() {
+       var text = $(this).text();
+       if(text==="None"){
+        $(this).parent().hide();
+       }
+});
+    });
+  </script>
 {% endblock %}
