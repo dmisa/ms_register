@@ -25,7 +25,6 @@ class MscaseForm(ModelForm):
         widgets = {
             'mspatient': forms.Select(attrs={'class':'form-control'}),
             'formdate': DateInput(attrs={'class':'form-control'}),
-            'studyid':forms.TextInput(attrs={'class':'form-control'}),
 
             #tier one
             'ms_now':forms.Select(attrs={'class':'form-control'}),

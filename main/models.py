@@ -80,7 +80,7 @@ class Mscase(models.Model):
     )
     mspatient = models.ForeignKey(Mspatient, null=True, on_delete= models.CASCADE)
     formdate = models.DateField()
-    studyid = models.CharField(max_length=6,primary_key=True)
+    studyid = models.AutoField(primary_key=True)
 
     ms_now = models.CharField(max_length=10,choices=ms_choices)
     conv_to_sp=models.CharField(max_length=20)
