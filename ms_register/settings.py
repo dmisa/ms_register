@@ -96,10 +96,10 @@ WSGI_APPLICATION = 'ms_register.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1d41nguhj191m',
-        'USER': 'envjfeorpqilxp',
-        'PASSWORD': '6c7fc1f568bf7005de99f8ea8927cd446f59ab8b7481f7d73d65a0706cf3f7a5',
-        'HOST': 'ec2-54-220-195-236.eu-west-1.compute.amazonaws.com',
+        'NAME': 'd4r9roi0lvlof4',
+        'USER': 'jjsfgobzedyeha',
+        'PASSWORD': '40b3b7388dd0dc1ff7c552c540f5bf06e56ef473a0cdf5e363310891e0cfaafb',
+        'HOST': 'ec2-108-128-104-50.eu-west-1.compute.amazonaws.com',
         'PORT':  '5432',    }
 }
 
