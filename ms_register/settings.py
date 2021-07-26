@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django_filters',
     'fontawesome-free',
     'xhtml2pdf',
-    'psycopg2',
 ]
 
 
@@ -95,12 +94,9 @@ WSGI_APPLICATION = 'ms_register.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4r9roi0lvlof4',
-        'USER': 'jjsfgobzedyeha',
-        'PASSWORD': '40b3b7388dd0dc1ff7c552c540f5bf06e56ef473a0cdf5e363310891e0cfaafb',
-        'HOST': 'ec2-108-128-104-50.eu-west-1.compute.amazonaws.com',
-        'PORT':  '5432',    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
